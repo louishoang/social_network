@@ -36,7 +36,9 @@ $(function() {
     "hideMethod": "fadeOut"
   };
 
-  $(".form-ajax").on("ajax:success", function(e, data, status, xhr){
+  $formAjax = $(".form-ajax");
+
+  $formAjax.on("ajax:success", function(e, data, status, xhr){
     _message = data.message;
     if(_message !== undefined){
       toastr.success(_message);
@@ -49,14 +51,21 @@ $(function() {
     }
   }).on("ajax:complete", function(e, xhr, settings){
     resp = $.parseJSON(xhr.responseText);
+
+    // Redirect if needed
     _location = resp.location;
     if(_location !== undefined && _location.length > 0 ){
       $(location).attr('href', _location);
     }
+
+    //Modify DOM with content
     _prepend_content = resp.prepend_content;
     if(_prepend_content !== undefined){
-      $prepend = $($(".form-ajax").data("prepend-el"));
+      $prepend = $($formAjax.data("prepend-el"));
       $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
     }
+
+    //reset form
+    $formAjax[0].reset();
   });
 });
