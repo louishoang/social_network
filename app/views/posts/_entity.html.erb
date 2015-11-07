@@ -1,0 +1,33 @@
+<div class="form-container c-padding no-radius post-detail">
+  <div class="row">
+    <div class="col-xs-12 columns">
+      <div class="post-header">
+        <div class="col-xs-2 columns no-padding">
+          <%= image_tag("emy.jpg", alt: "Profile Image", class: "xs-thumb") %>
+        </div>
+        <div class="col-xs-10 columns no-padding">
+          <%= entity.user.email %>
+          <div class="post-date">
+            <%= entity.updated_at.to_s(:post_datetime) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 columns m-t-20">
+      <div class="post-body">
+        <%= entity.content.html_safe %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="sline">
+    </div>
+    <div class="col-xs-12 columns">
+      <div class="post-bottom">
+        <i class="fa fa-commenting-o"></i> Comment
+      </div>
+    </div>
+  </div>
+</div>

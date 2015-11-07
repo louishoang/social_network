@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   
   def index
     @post = Post.new
-    @post_collection = Post.all
+    @post_collection = Post.all.order("created_at DESC")
   end
 end

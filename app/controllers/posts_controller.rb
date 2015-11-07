@@ -8,11 +8,16 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       respond_to do |format|
-        format.json {render json: { :post_valid => true }}
+        format.json {render json: {
+          :post_valid => true,
+          :message => "Post is created successfully",
+          :prepend_content => render_to_string(:partial => 'entity.html',
+            locals: {:entity => @post}
+          )}}
       end
     else
       respond_to do |format|
-        format.json {render json: { :post_valid => false, status: :unprocessable_entity }}
+        format.json {render json: { :post_valid => false, status: :unprocessable_entity, :message => @post.errors.full_messages.to_sentence }}
       end
     end
   end
