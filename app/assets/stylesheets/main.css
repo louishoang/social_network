@@ -1,3 +1,8 @@
+.main-container{
+  padding-top: 20px;
+  height: 100%;
+}
+
 nav.app-navbar{
   background-color: #3097d1;
   border-color: #1c73a5;
@@ -48,6 +53,66 @@ nav.app-navbar .search-form .form-group{
 
 .form-container.mc{
   padding: 10px 30px 10px 30px;
+}
+
+footer{
+  margin-top: 20px;
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+
+.copyright-bar .copyright a {
+  color: #3097D1;
+}
+
+.copyright-bar {
+  background: #121212;
+  padding: 15px 15px 15px 15px;
+}
+.copyright-bar .copyright {
+  color: #5d5c5c;
+  line-height: 28px;
+}
+
+/*Sign in page*/
+.sign-in-page .register-form .forgot-password,
+.sign-in-page .register-form .forgot-password:hover,
+.sign-in-page .register-form .forgot-password:focus {
+  color: #12cca7;
+}
+
+.sign-in-page .sign-in h4,
+.sign-in-page .create-new-account h4 {
+  font-size: 24px;
+  font-family: 'Fjalla One';
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ddd;
+  text-transform: uppercase;
+}
+.sign-in-page .sign-in p,
+.sign-in-page .create-new-account p {
+  font-size: 15px;
+  color: #666;
+}
+
+.sign-in-page .create-new-account > span {
+  font-size: 20px;
+  font-family: 'Fjalla One';
+  padding-bottom: 14px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.sign-in-page .create-new-account .checkbox label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.sign-in-page .register-form label {
+  font-size: 14px;
+  font-weight: 400;
+}
+.sign-in-page .register-form .form-group {
+  margin-bottom: 25px;
 }
 
 /*Left side main page start*/
