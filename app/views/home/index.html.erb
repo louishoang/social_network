@@ -31,6 +31,9 @@
     <div class="row-fluid post-showroom" id="posts-collection">
       <%= render partial: "posts/entity", collection: @post_collection %>
     </div>
+    <div id="infinite-scrolling">
+      <%= will_paginate @post_collection %>
+    </div>
   </div>
   <div class="col-xs-12 col-md-12 col-lg-3 columns">
     right

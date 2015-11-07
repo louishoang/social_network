@@ -1,0 +1,7 @@
+$('#posts-collection').append('<%= j render(:partial => "posts/entity.html", collection: @post_collection ) %>');
+<% if @post_collection.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @post_collection %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

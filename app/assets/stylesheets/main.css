@@ -202,6 +202,15 @@ footer{
   margin-bottom: 25px;
 }
 
+#infinite-scrolling{
+  text-align: center;
+}
+
+#infinite-scrolling .loading-sign{
+  width: 20px;
+  height: 20px;
+}
+
 /*Left side main page start*/
 
 .main-l-profile .header{
