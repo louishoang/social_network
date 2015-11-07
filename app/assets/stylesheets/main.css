@@ -46,6 +46,10 @@ nav.app-navbar .search-form .form-group{
   border: 1px #dddddd solid;
 }
 
+.form-container.mc{
+  padding: 10px 30px 10px 30px;
+}
+
 /*Left side main page start*/
 
 .main-l-profile .header{
