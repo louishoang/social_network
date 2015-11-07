@@ -1,0 +1,33 @@
+nav.app-navbar{
+  background-color: #3097d1;
+  border-color: #1c73a5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  color: white;
+}
+
+nav.app-navbar .navbar-nav > .active > a,
+nav.app-navbar .navbar-nav > .active > a:hover,
+nav.app-navbar .navbar-nav > .active > a:focus{
+  color: #ffffff;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+nav.app-navbar > .container .navbar-brand,
+nav.app-navbar .navbar-nav > li > a{
+  color: white;
+}
+
+.navbar-form .m-search{
+  width: 100px;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition:width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+  float:right;
+}
+
+.navbar-form .m-search:focus{
+  width: 250px;
+}
