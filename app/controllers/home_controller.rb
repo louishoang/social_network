@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   
   def index
     @post = Post.new
-    @all_posts = Post.all
+    @post_collection = Post.all
   end
 end

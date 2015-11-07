@@ -6,11 +6,53 @@ $(function(){
       menubar: false,
       statusbar: false,
       height : "40",
+      convert_urls: false,
       autoresize_min_height: 50,
       autoresize_max_height: 500,
       setup: function(editor) {
+        editor.on("keyup change", function(e){
+          e.preventDefault();
+          // copy content to the selector for validation;
+          _content = tinyMCE.activeEditor.getContent();
+          $(".text-editor").text(tinyMCE.activeEditor.getContent()); 
+          tinyMCE.triggerSave();
+        });
         editor.on('blur', function(e){         
         });
+        // Set placeholder
+        var placeholder = $('#' + editor.id).attr('placeholder');
+        if (typeof placeholder !== 'undefined' && placeholder !== false) {
+          var is_default = false;
+          editor.on('init', function() {
+            // get the current content
+            var cont = editor.getContent();
+
+            // If its empty and we have a placeholder set the value
+            if (cont.length === 0) {
+              editor.setContent(placeholder);
+              // Get updated content
+              cont = placeholder;
+            }
+            // convert to plain text and compare strings
+            is_default = (cont == placeholder);
+
+            // nothing to do
+            if (!is_default) {
+              return;
+            }
+          })
+          .on('focus', function() {
+            // replace the default content on focus if the same as original placeholder
+            if (is_default) {
+              editor.setContent('');
+            }
+          })
+          .on('blur', function() {
+            if (editor.getContent().length === 0) {
+              editor.setContent(placeholder);
+            }
+          });
+        }
       },
       plugins: [
         "autoresize advlist autolink link image lists charmap hr anchor pagebreak spellchecker",
