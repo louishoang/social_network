@@ -19,15 +19,23 @@ nav.app-navbar .navbar-nav > li > a{
   color: white;
 }
 
-.navbar-form .m-search{
-  width: 100px;
-  -webkit-transition: width 1s ease-in-out;
-  -moz-transition:width 1s ease-in-out;
-  -o-transition: width 1s ease-in-out;
-  transition: width 1s ease-in-out;
-  float:right;
+nav.app-navbar .search-form{
+  margin-top: 10px;
+  display: block;
 }
 
-.navbar-form .m-search:focus{
-  width: 250px;
+nav.app-navbar .search-form .form-group{
+  margin-bottom: 0px;
+}
+
+.search-form .m-search{
+  width: 200px;
+  -webkit-transition: width .15s ease-in-out;
+  -moz-transition:width .15s ease-in-out;
+  -o-transition: width .15s ease-in-out;
+  transition: width .15s ease-in-out;
+}
+
+.search-form .m-search:focus{
+  width: 400px;
 }
