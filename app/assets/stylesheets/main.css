@@ -39,3 +39,39 @@ nav.app-navbar .search-form .form-group{
 .search-form .m-search:focus{
   width: 400px;
 }
+
+.form-container {
+  background-color: white;
+  border-radius: 5px 5px 0 0;
+  border: 1px #dddddd solid;
+}
+
+/*Left side main page start*/
+
+.main-l-profile .header{
+  border-radius: 5px 5px 0 0;
+  background: 
+  radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent),
+  radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px,
+  linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px,
+  linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0;
+  background-color: slategray;
+  background-size: 30px 30px, 10px 10px, 5px 5px, 5px 5px;
+  height: 140px;
+}
+
+.main-l-profile .body{
+  text-align: center;
+}
+
+.main-l-profile .body .bottom{
+  padding: 5px 20px 5px 20px;
+}
+
+.main-l-profile .ava{
+  border-radius: 50%;
+  width: 150px;
+  margin-top: -70px;
+  margin-bottom: 5px;
+  border: 3px solid #fff;
+}
