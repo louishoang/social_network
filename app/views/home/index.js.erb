@@ -3,5 +3,5 @@ $('#posts-collection').append('<%= j render(:partial => "posts/entity.html", col
   $('.pagination').replaceWith('<%= j will_paginate @post_collection %>');
 <% else %>
   $(window).off('scroll');
-  $('.pagination').remove();
+  $('.pagination').html("Looks like you've reached the end");
 <% end %>
