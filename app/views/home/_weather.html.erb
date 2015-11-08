@@ -1,0 +1,16 @@
+<div class="main-r-profile form-container x-padding weather-panel">
+  <div class="header">Local Weather</div>
+  <div class="body">
+    <div id="temp-detail">
+      <i class="fa fa-sun-o fa-2x"></i>
+      <span id="temp"><%= convert_temp(@weather_data["main"]["temp"]) %></span>
+    </div>
+    <div class="details">
+      <i class="fa fa-soundcloud fa-2x"></i> <%= @weather_data["weather"][0]["description"] %>
+    </div> 
+    <div class="details">
+      <i class="fa fa-map-marker fa-2x"></i> <%= location(@weather_data) %>
+    </div>
+    
+  </div>
+</div>

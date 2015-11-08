@@ -1,22 +1,31 @@
 $(function(){
-  var $trendings = $("#trendings");
-
   function getLocation(elm) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        $trendings.innerHTML = "Geolocation is not supported by this browser.";
+      console.log("Geolocation is not supported by this browser.");
     }
   }
   function showPosition(position) {
-      $trendings.find("#longitude").val(position.coords.latitude);
-      $trendings.find()
-      $trendings.innerHTML = "Latitude: " + position.coords.latitude + 
-      "<br>Longitude: " + position.coords.longitude; 
+    localStorage["longitude"] = position.coords.longitude;
+    localStorage["latitude"] = position.coords.latitude; 
   }
 
-  getLocation();
+  if(!localStorage["longitude"]){
+    getLocation();
+  }
 
+  var $weather = $("#current-weather");
+
+  if($weather !== []){
+    $.ajax({
+      url: "/weather?longitude=" + localStorage["longitude"] + "&latitude=" + localStorage["latitude"],
+      success: function(resp){
+        $weather.html(resp);
+      }
+    });
+  }
+  
   var renderUI = function(cx){
     //HTML text editor
     tinymce.init({
@@ -69,45 +78,45 @@ $(function(){
 
   // calling render jquery 
   renderUI(document);
-    $formAjax = $(".form-ajax");
+  $formAjax = $(".form-ajax");
 
-    $formAjax.on("ajax:success", function(e, data, status, xhr){
-      _message = data.message;
-      if(_message !== undefined){
-        toastr.success(_message);
-      }
-    }).on("ajax:error", function(e, xhr, status, error){
-      resp = $.parseJSON(xhr.responseText);
-      _message = resp.message;
-      if(_message !== undefined){
-        toastr.error(_message);
-      }
-    }).on("ajax:complete", function(e, xhr, settings){
-      resp = $.parseJSON(xhr.responseText);
+  $formAjax.on("ajax:success", function(e, data, status, xhr){
+    _message = data.message;
+    if(_message !== undefined){
+      toastr.success(_message);
+    }
+  }).on("ajax:error", function(e, xhr, status, error){
+    resp = $.parseJSON(xhr.responseText);
+    _message = resp.message;
+    if(_message !== undefined){
+      toastr.error(_message);
+    }
+  }).on("ajax:complete", function(e, xhr, settings){
+    resp = $.parseJSON(xhr.responseText);
 
-      // Redirect if needed
-      _location = resp.location;
-      if(_location !== undefined && _location.length > 0 ){
-        $(location).attr('href', _location);
-      }
+    // Redirect if needed
+    _location = resp.location;
+    if(_location !== undefined && _location.length > 0 ){
+      $(location).attr('href', _location);
+    }
 
-      //Modify DOM with content
-      _prepend_content = resp.prepend_content;
-      if(_prepend_content !== undefined){
-        $prepend = $($(e.target).data("prepend-el"));
-        $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
-        renderUI($prepend);
-      }
+    //Modify DOM with content
+    _prepend_content = resp.prepend_content;
+    if(_prepend_content !== undefined){
+      $prepend = $($(e.target).data("prepend-el"));
+      $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
+      renderUI($prepend);
+    }
 
-      _append_content = resp.append_content;
-      if(_append_content !== undefined){
-        $append = $($(e.target).data("append-el"));
-        $append.append(_append_content);
-      }
+    _append_content = resp.append_content;
+    if(_append_content !== undefined){
+      $append = $($(e.target).data("append-el"));
+      $append.append(_append_content);
+    }
 
-      //reset form
-      $formAjax[0].reset();
-    });
+    //reset form
+    $formAjax[0].reset();
+  });
 
 
   $(document).on("click", ".get_comments", function(e){
@@ -126,7 +135,6 @@ $(function(){
     }
   });
 
-
   toastr.options = {
     "closeButton": true,
     "debug": false,
@@ -144,9 +152,6 @@ $(function(){
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   };
-
-  
-
 
 });
 

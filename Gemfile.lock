@@ -70,7 +70,6 @@ GEM
     execjs (2.6.0)
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
-    geocoder (1.2.11)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -181,7 +180,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   font-awesome-rails
-  geocoder
   jbuilder (~> 2.0)
   jquery-rails
   pg
