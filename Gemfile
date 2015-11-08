@@ -46,6 +46,13 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'shoulda'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'factory_girl_rails'
+  gem 'factory_girl'
+  gem 'dotenv-rails'
   gem 'pry-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

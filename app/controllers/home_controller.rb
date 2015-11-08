@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 
   def weather
     require 'net/http'
-    link = "http://api.openweathermap.org/data/2.5/weather?lat=" + params[:latitude] + "&lon=" + params[:longitude] + "&APPID=" + "b778a6b7e8e78e22202c055fa05227de"
+    link = "http://api.openweathermap.org/data/2.5/weather?lat=" + params[:latitude] + "&lon=" + params[:longitude] + "&APPID=" + ENV["WEATHER_APP_ID"]
     result = Net::HTTP.get(URI.parse(link)) rescue nil
     if result
       @weather_data = JSON.parse(result) rescue nil

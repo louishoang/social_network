@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.json {render json: {
           count: @comment.post.comments.count,
-          :append_content => render_to_string(:partial => 'entity.html',
+          :comment_content => render_to_string(:partial => 'entity.html',
             locals: {:entity => @comment}
           )}}
       end

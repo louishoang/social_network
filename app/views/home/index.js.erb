@@ -1,6 +1,21 @@
 $('#posts-collection').append('<%= j render(:partial => "posts/entity.html", collection: @post_collection ) %>');
 <% if @post_collection.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @post_collection %>');
+
+  $(".comment-form").on("ajax:success", function(e, data, status, xhr){
+    postID = $(e.target).find("#comment_post_id").val();
+    $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
+    _append_content = data.comment_content;
+
+    if(_append_content !== undefined && $currentCommentCount.text() < data.count){
+      $currentCommentCount.text(data.count);
+      $append = $($(e.target).data("append-el"));
+      $append.append(_append_content);
+      $append.attr("loaded", "loaded");
+    }
+    $(e.target)[0].reset();
+  });
+
 <% else %>
   $(window).off('scroll');
   $('.pagination').html("Looks like you've reached the end");

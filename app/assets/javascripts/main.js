@@ -1,4 +1,4 @@
-$(function(){
+$( document ).ready(function() {
   function getLocation(elm) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -17,7 +17,7 @@ $(function(){
 
   var $weather = $("#current-weather");
 
-  if($weather !== []){
+  if($weather.length > 0){
     $.ajax({
       url: "/weather?longitude=" + localStorage["longitude"] + "&latitude=" + localStorage["latitude"],
       success: function(resp){
@@ -26,53 +26,52 @@ $(function(){
     });
   }
   
-  var renderUI = function(cx){
-    //HTML text editor
-    tinymce.init({
-      selector: ".text-editor",
-      menubar: false,
-      statusbar: false,
-      height : "40",
-      convert_urls: false,
-      autoresize_min_height: 50,
-      autoresize_max_height: 500,
-      setup: function(editor) {
-        editor.on("keyup change", function(e){
-          e.preventDefault();
-          // copy content to the selector for validation;
-          _content = tinyMCE.activeEditor.getContent();
-          $(".text-editor").text(tinyMCE.activeEditor.getContent()); 
-          tinyMCE.triggerSave();
-        });
-        editor.on('blur', function(e){         
-        });
-      },
-      plugins: [
-        "autoresize advlist autolink link image lists charmap hr anchor pagebreak spellchecker",
-        "searchreplace visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-        "table contextmenu directionality emoticons template paste textcolor"
-      ],
-      toolbar: "bold italic | link image | media fullpage | forecolor backcolor emoticons" , 
-      style_formats: [
-        {title: 'Bold text', inline: 'b'},
-        {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-        {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-        {title: 'Example 1', inline: 'span', classes: 'example1'},
-        {title: 'Example 2', inline: 'span', classes: 'example2'},
-        {title: 'Table styles'},
-        {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-        ]
-    });
+  //HTML text editor
+  tinymce.init({
+    selector: ".text-editor",
+    menubar: false,
+    statusbar: false,
+    height : "40",
+    convert_urls: false,
+    autoresize_min_height: 50,
+    autoresize_max_height: 500,
+    setup: function(editor) {
+      editor.on("keyup change", function(e){
+        e.preventDefault();
+        // copy content to the selector for validation;
+        _content = tinyMCE.activeEditor.getContent();
+        $(".text-editor").text(tinyMCE.activeEditor.getContent()); 
+        tinyMCE.triggerSave();
+      });
+      editor.on('blur', function(e){         
+      });
+    },
+    plugins: [
+      "autoresize advlist autolink link image lists charmap hr anchor pagebreak spellchecker",
+      "searchreplace visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+      "table contextmenu directionality emoticons template paste textcolor"
+    ],
+    toolbar: "bold italic | link image | media fullpage | forecolor backcolor emoticons" , 
+    style_formats: [
+      {title: 'Bold text', inline: 'b'},
+      {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+      {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+      {title: 'Example 1', inline: 'span', classes: 'example1'},
+      {title: 'Example 2', inline: 'span', classes: 'example2'},
+      {title: 'Table styles'},
+      {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+      ]
+  });
 
+  var renderForm = function(){
     $(".comment-form").on("ajax:success", function(e, data, status, xhr){
       postID = $(e.target).find("#comment_post_id").val();
       $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
-      $currentCommentCount.text(data.count);
+      _append_content = data.comment_content;
 
-      _append_content = data.append_content;
-      $append = $($(e.target).data("append-el"));
-
-      if(_append_content !== undefined && $currentCommentCount.text() == data.count){
+      if(_append_content !== undefined && $currentCommentCount.text() < data.count){
+        $currentCommentCount.text(data.count);
+        $append = $($(e.target).data("append-el"));
         $append.append(_append_content);
         $append.attr("loaded", "loaded");
       }
@@ -80,12 +79,7 @@ $(function(){
     });
   }
 
-  $(document).on("renderUI", function(e, context){
-    renderUI(context);
-  });
-
-  // calling render jquery 
-  renderUI(document);
+  renderForm();
   $formAjax = $(".form-ajax");
 
   $formAjax.on("ajax:success", function(e, data, status, xhr){
@@ -113,7 +107,7 @@ $(function(){
     if(_prepend_content !== undefined){
       $prepend = $($(e.target).data("prepend-el"));
       $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
-      renderUI($prepend);
+      renderForm();
     }
 
     _append_content = resp.append_content;
