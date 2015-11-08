@@ -4,7 +4,8 @@
       <div class="header"></div>
       <div class="body">
         <a href="profile/index.html">
-          <%= image_tag("emy.jpg", alt: "Profile Image", class: "ava") %>
+
+          <%= image_tag(@user.avatar.url(:medium), alt: "Profile Image", class: "ava") %>
         </a>
         <div class="bottom">
           <h4 class="profile-name">

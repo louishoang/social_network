@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def current_post_id
     params[:post_id] || nil 
   end
+
+  def after_sign_in_path_for(resource)
+    user_path(current_user)
+  end
 end

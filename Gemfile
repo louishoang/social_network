@@ -34,6 +34,13 @@ gem 'tinymce-rails'
 
 gem 'friendly_id', '~> 5.1.0'
 
+#upload-storage
+gem "paperclip", "~> 4.3"
+gem 'rmagick', '~> 2.15.3'
+gem "fog"
+gem "fog-aws"
+gem 'aws-sdk', '~> 1.6'
+
 #pagination
 gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'

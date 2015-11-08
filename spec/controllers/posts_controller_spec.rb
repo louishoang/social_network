@@ -28,6 +28,5 @@ RSpec.describe PostsController, type: :controller do
         expect(response.body).to have_content("You need to sign in or sign up before continuing")
       end
     end
-
   end
 end

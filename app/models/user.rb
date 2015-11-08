@@ -6,6 +6,13 @@ class User < ActiveRecord::Base
 
   has_many :posts
 
+  has_attached_file :avatar, styles: { medium: "150x150>", thumb: "50x50>" },
+    default_url: "/images/:style/missing.png",
+    :storage => :s3,
+    :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
@@ -21,5 +28,9 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     new_record?
+  end
+
+  def s3_credentials
+    {:bucket => "cholon", :access_key_id => ENV['AWS_ACCESS_KEY_ID'], :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']}
   end
 end
