@@ -27,7 +27,7 @@
     <div class="col-xs-12 columns">
       <div class="post-bottom">
         <% @comments = entity.comments %>
-        <a href="javascript:;" data-url="<%= post_comments_path(entity) %>" class="get_comments" data-replace="#<%= dom_id(entity) %>_comment_collections" data-clicked="false">
+        <a href="javascript:;" data-url="<%= post_comments_path(entity) %>" class="get_comments" data-replace="#<%= dom_id(entity) %>_comment_collections">
           <i class="fa fa-commenting-o"></i> Comment (<span id="<%= dom_id(entity) %>_comment"><%= @comments.count %></span>)
         </a>
       </div>

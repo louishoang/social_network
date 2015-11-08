@@ -68,6 +68,14 @@ $(function(){
       postID = $(e.target).find("#comment_post_id").val();
       $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
       $currentCommentCount.text(data.count);
+
+      _append_content = data.append_content;
+      $append = $($(e.target).data("append-el"));
+
+      if(_append_content !== undefined && $currentCommentCount.text() == data.count){
+        $append.append(_append_content);
+        $append.attr("loaded", "loaded");
+      }
       $(e.target)[0].reset();
     });
   }
@@ -122,12 +130,11 @@ $(function(){
   $(document).on("click", ".get_comments", function(e){
     $this = $(e.target);
     $commentsElm = $($this.data("replace"));
-    if(parseInt($this.text()) !== 0 && $this.data("clicked") == false){
+    if(parseInt($this.text()) !== 0){
       url = $this.data("url");
       $.ajax({
         url: url,
         success: function(resp){
-          $this.data("clicked", true);
           $commentsElm.html(resp);
           renderUI($commentsElm);
         }
