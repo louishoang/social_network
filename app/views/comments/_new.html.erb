@@ -3,7 +3,7 @@
 
 <div class="col-xs-12 columns">
   <%= form_for [post, @new_comment], :html => {:class => "form-vertical comment-form form-ajax", remote: true, "data-append-el" => "##{dom_id(post)}_comment_collections"} do |f| %>
-    <%= f.text_field "text", :placeholder => "Write a comment", :class => "form-control com-input" %>
+    <%= f.text_field "text", :placeholder => "Write a comment", :class => "form-control com-input", :required => true %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :post_id, :value => post.id rescue nil %>
   <% end %>

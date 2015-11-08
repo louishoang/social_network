@@ -15,7 +15,6 @@ $(function(){
       "<br>Longitude: " + position.coords.longitude; 
   }
 
-
   getLocation();
 
   var renderUI = function(cx){
@@ -38,40 +37,6 @@ $(function(){
         });
         editor.on('blur', function(e){         
         });
-        // Set placeholder
-        var placeholder = $('#' + editor.id).attr('placeholder');
-        if (typeof placeholder !== 'undefined' && placeholder !== false) {
-          var is_default = false;
-          editor.on('init', function() {
-            // get the current content
-            var cont = editor.getContent();
-
-            // If its empty and we have a placeholder set the value
-            if (cont.length === 0) {
-              editor.setContent(placeholder);
-              // Get updated content
-              cont = placeholder;
-            }
-            // convert to plain text and compare strings
-            is_default = (cont == placeholder);
-
-            // nothing to do
-            if (!is_default) {
-              return;
-            }
-          })
-          .on('focus', function() {
-            // replace the default content on focus if the same as original placeholder
-            if (is_default) {
-              editor.setContent('');
-            }
-          })
-          .on('blur', function() {
-            if (editor.getContent().length === 0) {
-              editor.setContent(placeholder);
-            }
-          });
-        }
       },
       plugins: [
         "autoresize advlist autolink link image lists charmap hr anchor pagebreak spellchecker",
@@ -90,56 +55,13 @@ $(function(){
         ]
     });
 
-
-
     $(".comment-form").on("ajax:success", function(e, data, status, xhr){
-    postID = $(e.target).find("#comment_post_id").val();
-    $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
-    $currentCommentCount.text(parseInt($currentCommentCount.text()) + 1);
-    $(e.target)[0].reset();
-  });
-
-  $formAjax = $(".form-ajax");
-
-  $formAjax.on("ajax:success", function(e, data, status, xhr){
-    _message = data.message;
-    if(_message !== undefined){
-      toastr.success(_message);
-    }
-  }).on("ajax:error", function(e, xhr, status, error){
-    resp = $.parseJSON(xhr.responseText);
-    _message = resp.message;
-    if(_message !== undefined){
-      toastr.error(_message);
-    }
-  }).on("ajax:complete", function(e, xhr, settings){
-    resp = $.parseJSON(xhr.responseText);
-
-    // Redirect if needed
-    _location = resp.location;
-    if(_location !== undefined && _location.length > 0 ){
-      $(location).attr('href', _location);
-    }
-
-    //Modify DOM with content
-    _prepend_content = resp.prepend_content;
-    if(_prepend_content !== undefined){
-      $prepend = $($(e.target).data("prepend-el"));
-      $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
-      renderUI($prepend);
-    }
-
-    _append_content = resp.append_content;
-    if(_append_content !== undefined){
-      $append = $($(e.target).data("append-el"));
-      $append.append(_append_content);
-    }
-
-    //reset form
-    $formAjax[0].reset();
-  });
-
-
+      debugger;
+      postID = $(e.target).find("#comment_post_id").val();
+      $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
+      $currentCommentCount.text(data.count);
+      $(e.target)[0].reset();
+    });
   }
 
   $(document).on("renderUI", function(e, context){
@@ -148,11 +70,51 @@ $(function(){
 
   // calling render jquery 
   renderUI(document);
+    $formAjax = $(".form-ajax");
+
+    $formAjax.on("ajax:success", function(e, data, status, xhr){
+      _message = data.message;
+      if(_message !== undefined){
+        toastr.success(_message);
+      }
+    }).on("ajax:error", function(e, xhr, status, error){
+      resp = $.parseJSON(xhr.responseText);
+      _message = resp.message;
+      if(_message !== undefined){
+        toastr.error(_message);
+      }
+    }).on("ajax:complete", function(e, xhr, settings){
+      resp = $.parseJSON(xhr.responseText);
+
+      // Redirect if needed
+      _location = resp.location;
+      if(_location !== undefined && _location.length > 0 ){
+        $(location).attr('href', _location);
+      }
+
+      //Modify DOM with content
+      _prepend_content = resp.prepend_content;
+      if(_prepend_content !== undefined){
+        $prepend = $($(e.target).data("prepend-el"));
+        $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
+        renderUI($prepend);
+      }
+
+      _append_content = resp.append_content;
+      if(_append_content !== undefined){
+        $append = $($(e.target).data("append-el"));
+        $append.append(_append_content);
+      }
+
+      //reset form
+      $formAjax[0].reset();
+    });
+
 
   $(document).on("click", ".get_comments", function(e){
     $this = $(e.target);
     $commentsElm = $($this.data("replace"));
-    if(parseInt($this.text()) !== 0 && $commentsElm.html().length == 0){
+    if(parseInt($this.text()) !== 0){
       url = $this.data("url");
       $.ajax({
         url: url,
@@ -161,10 +123,6 @@ $(function(){
           renderUI($commentsElm);
         }
       });
-    }else if(parseInt($this.text()) !== 0 && $commentsElm.html().length > 0 && $commentsElm.is(":hidden")){
-      $commentsElm.show();
-    }else{
-      $commentsElm.hide();
     }
   });
 
