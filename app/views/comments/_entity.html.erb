@@ -1,0 +1,8 @@
+<div class="row-fluid">
+  <div class="col-xs-12 indi-com">
+    <span class="cau"><%= entity.author %></span>: <%= entity.text %>
+    <span class="time_dist">
+      <%= distance_of_time_in_words(Time.now - entity.created_at) %> ago
+    </span>
+  </div>
+</div>

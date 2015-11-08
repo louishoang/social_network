@@ -36,6 +36,13 @@ $(function() {
     "hideMethod": "fadeOut"
   };
 
+  $(".comment-form").on("ajax:success", function(e, data, status, xhr){
+    postID = $(e.target).find("#comment_post_id").val();
+    $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
+    $currentCommentCount.text(parseInt($currentCommentCount.text()) + 1);
+    $(e.target)[0].reset();
+  });
+
   $formAjax = $(".form-ajax");
 
   $formAjax.on("ajax:success", function(e, data, status, xhr){
@@ -61,8 +68,14 @@ $(function() {
     //Modify DOM with content
     _prepend_content = resp.prepend_content;
     if(_prepend_content !== undefined){
-      $prepend = $($formAjax.data("prepend-el"));
+      $prepend = $($(e.target).data("prepend-el"));
       $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
+    }
+
+    _append_content = resp.append_content;
+    if(_append_content !== undefined){
+      $append = $($(e.target).data("append-el"));
+      $append.append(_append_content);
     }
 
     //reset form

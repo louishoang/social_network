@@ -8,7 +8,7 @@ body{
 
 .main-container{
   padding-top: 20px;
-  height: 100%;
+  min-height: 100%;
 }
 
 nav.app-navbar{
@@ -211,6 +211,10 @@ footer{
   height: 20px;
 }
 
+.mce-formitem input.mce-textbox{
+  max-width: 240px !important;
+}
+
 /*Left side main page start*/
 
 .main-l-profile .header{
@@ -239,4 +243,30 @@ footer{
   margin-top: -70px;
   margin-bottom: 5px;
   border: 3px solid #fff;
+}
+/*Left side main page end*/
+
+.comment-form{
+  margin-top: 5px;
+}
+
+.indi-com{
+  padding: 5px 0px 5px 0px;
+  word-break: break-word;
+}
+
+.indi-com .cau{
+  font-size: 12px;
+  line-height: 14px;
+  color: #006fa6;
+  font-weight: normal;
+  text-decoration: none;
+  color: #008cc9;
+}
+
+.indi-com .time_dist{
+  text-align: right;
+  float: right;
+  font-size: 10px;
+  color: #9197a3;
 }
