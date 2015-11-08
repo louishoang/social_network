@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @comments = Comment.where("post_id = ?", current_post_id).order("created_at")
+    render :partial => "index"
+  end
+
   def new
   end
 

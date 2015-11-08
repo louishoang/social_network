@@ -1,4 +1,23 @@
 $(function(){
+  var $trendings = $("#trendings");
+
+  function getLocation(elm) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        $trendings.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  function showPosition(position) {
+      $trendings.find("#longitude").val(position.coords.latitude);
+      $trendings.find()
+      $trendings.innerHTML = "Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude; 
+  }
+
+
+  getLocation();
+
   var renderUI = function(cx){
     //HTML text editor
     tinymce.init({
@@ -78,5 +97,24 @@ $(function(){
 
   // calling render jquery 
   renderUI(document);
+
+  $(document).on("click", ".get_comments", function(e){
+    $this = $(e.target);
+    $commentsElm = $($this.data("replace"));
+    if(parseInt($this.text()) !== 0 && $commentsElm.html().length == 0){
+      url = $this.data("url");
+      $.ajax({
+        url: url,
+        success: function(resp){
+          $commentsElm.html(resp);
+          renderUI($commentsElm);
+        }
+      });
+    }else if(parseInt($this.text()) !== 0 && $commentsElm.html().length > 0 && $commentsElm.is(":hidden")){
+      $commentsElm.show();
+    }else{
+      $commentsElm.hide();
+    }
+  });
 });
 

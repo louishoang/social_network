@@ -1,4 +1,5 @@
 <% @new_comment = Comment.new %>
+<% post = local_assigns.fetch(:post, nil) %>
 
 <div class="col-xs-12 columns">
   <%= form_for [post, @new_comment], :html => {:class => "form-vertical comment-form form-ajax", remote: true, "data-append-el" => "##{dom_id(post)}_comment_collections"} do |f| %>

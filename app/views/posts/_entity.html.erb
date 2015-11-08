@@ -27,14 +27,12 @@
     <div class="col-xs-12 columns">
       <div class="post-bottom">
         <% @comments = entity.comments %>
-        <i class="fa fa-commenting-o"></i> Comment (<span id="<%= dom_id(entity) %>_comment"><%= @comments.count %></span>)
+        <a href="javascript:;" data-url="<%= post_comments_path(entity) %>" class="get_comments" data-replace="#<%= dom_id(entity) %>_comment_collections" data-clicked="false">
+          <i class="fa fa-commenting-o"></i> Comment (<span id="<%= dom_id(entity) %>_comment"><%= @comments.count %></span>)
+        </a>
       </div>
     </div>
-    <div class="post-comments" id="<%= dom_id(entity) %>_comment_collections">
-      <% if @comments.count > 0 %>
-          <%= render :partial => "comments/entity", :collection => @comments.take(5) %>
-      <% end %>
-    </div>
-    <%= render "comments/new", :post => entity %>
+    <div class="post-comments" id="<%= dom_id(entity) %>_comment_collections"></div>
+    <%= render :partial => "comments/new.html", :locals => {:post => entity} %>
   </div>
 </div>
