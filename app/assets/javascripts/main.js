@@ -56,7 +56,6 @@ $(function(){
     });
 
     $(".comment-form").on("ajax:success", function(e, data, status, xhr){
-      debugger;
       postID = $(e.target).find("#comment_post_id").val();
       $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
       $currentCommentCount.text(data.count);
@@ -114,11 +113,12 @@ $(function(){
   $(document).on("click", ".get_comments", function(e){
     $this = $(e.target);
     $commentsElm = $($this.data("replace"));
-    if(parseInt($this.text()) !== 0){
+    if(parseInt($this.text()) !== 0 && $this.data("clicked") == false){
       url = $this.data("url");
       $.ajax({
         url: url,
         success: function(resp){
+          $this.data("clicked", true);
           $commentsElm.html(resp);
           renderUI($commentsElm);
         }
