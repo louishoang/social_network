@@ -18,6 +18,16 @@ $(function(){
 
   getLocation();
 
+  var renderFormRemote = function(cx){
+
+    $('.com-input').keypress(function (e) {
+      if (e.which == 13) {
+        $(e.target).closest('form').submit();
+        return false;
+      }
+    });
+  };
+
   var renderUI = function(cx){
     //HTML text editor
     tinymce.init({
@@ -116,5 +126,73 @@ $(function(){
       $commentsElm.hide();
     }
   });
+
+
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "7000",
+    "hideDuration": "3000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+
+  $(".comment-form").on("ajax:success", function(e, data, status, xhr){
+    postID = $(e.target).find("#comment_post_id").val();
+    $currentCommentCount = $($(document).find("#post_" + postID + "_comment"));
+    $currentCommentCount.text(parseInt($currentCommentCount.text()) + 1);
+    $(e.target)[0].reset();
+  });
+
+  $formAjax = $(".form-ajax");
+
+  $formAjax.on("ajax:success", function(e, data, status, xhr){
+    _message = data.message;
+    if(_message !== undefined){
+      toastr.success(_message);
+    }
+  }).on("ajax:error", function(e, xhr, status, error){
+    resp = $.parseJSON(xhr.responseText);
+    _message = resp.message;
+    if(_message !== undefined){
+      toastr.error(_message);
+    }
+  }).on("ajax:complete", function(e, xhr, settings){
+    resp = $.parseJSON(xhr.responseText);
+
+    // Redirect if needed
+    _location = resp.location;
+    if(_location !== undefined && _location.length > 0 ){
+      $(location).attr('href', _location);
+    }
+
+    //Modify DOM with content
+    _prepend_content = resp.prepend_content;
+    if(_prepend_content !== undefined){
+      $prepend = $($(e.target).data("prepend-el"));
+      $(_prepend_content).prependTo($prepend).hide().slideDown( "slow");
+      renderFormRemote($prepend);
+    }
+
+    _append_content = resp.append_content;
+    if(_append_content !== undefined){
+      $append = $($(e.target).data("append-el"));
+      $append.append(_append_content);
+    }
+
+    //reset form
+    $formAjax[0].reset();
+  });
+
+
 });
 
