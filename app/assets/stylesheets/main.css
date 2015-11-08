@@ -117,6 +117,7 @@ nav.app-navbar .search-form .form-group{
 .post-detail .post-body{
   font-size: 14px;
   word-break: break-word;
+  overflow-x: scroll;
 }
 
 .post-detail .post-header{
