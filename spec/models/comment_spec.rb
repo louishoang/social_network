@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  describe 'validations' do
+    it { should validate_presence_of(:text) }
+    it { should validate_length_of(:text).is_at_least(1) }
+    it { should validate_length_of(:text).is_at_most(250) }
+    it { should validate_presence_of(:user) }
+  end
+
   describe 'associations' do
     it { should belong_to(:post) }
     it { should belong_to(:user) }
@@ -8,10 +15,6 @@ RSpec.describe Comment, type: :model do
 
   it 'has a valid factory' do
     expect(build(:comment)).to be_valid
-  end
-
-  it 'is invalid without a content of text' do
-    expect(build(:comment, text: nil)).to_not be_valid
   end
 
   it 'populate author name after save' do

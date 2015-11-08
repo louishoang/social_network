@@ -3,6 +3,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments
 
-  validates :content, presence: true
+  validates :content, presence: true, length: { in: (1..1000) }
   validates :user, presence: true
 end
