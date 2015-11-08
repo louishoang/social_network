@@ -101,6 +101,10 @@ nav.app-navbar .search-form .form-group{
   padding: 10px 30px 20px 30px;
 }
 
+.form-container.x2-padding{
+  padding: 30px 80px 30px 80px;
+}
+
 .post-showroom{
   margin-top: 20px;
 }

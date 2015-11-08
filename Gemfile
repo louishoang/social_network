@@ -32,6 +32,8 @@ gem 'devise'
 # html editor
 gem 'tinymce-rails'
 
+gem 'friendly_id', '~> 5.1.0'
+
 #pagination
 gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'

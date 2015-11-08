@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="col-xs-12 col-md-12 col-lg-3 columns">
+    <div class="main-l-profile form-container">
+      <div class="header"></div>
+      <div class="body">
+        <a href="profile/index.html">
+          <%= image_tag("emy.jpg", alt: "Profile Image", class: "ava") %>
+        </a>
+        <div class="bottom">
+          <h4 class="profile-name">
+            <a class="link--name" href="<%= edit_user_path(@user)%>"><%= @user.full_name %>&nbsp;&nbsp;<i class="fa fa-pencil-square-o"></i></a>
+          </h4>
+          <p class="description"><%= @user.bio %>&nbsp;also.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-12 col-lg-6 columns">
+    <div class="row-fluid">
+      <div class="form-container">
+        <%= form_for @post, url: posts_path, html: {class: "form-ajax", method: "POST", :remote => true, "data-prepend-el" => "#posts-collection"} do |f| %>
+          <textarea class="form-control text-editor" id="post_content" name="post[content]" placeholder="What's on your mind?" required="required">
+          </textarea>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <div class="message-bottom">
+            <button class="btn btn-primary btn-sm btn-padding">Post</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row-fluid post-showroom" id="posts-collection">
+      <%= render partial: "posts/entity", collection: @post_collection %>
+    </div>
+    <div id="infinite-scrolling">
+      <%= will_paginate @post_collection %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-12 col-lg-3 columns" id="current-weather">
+  </div>
+</div>
