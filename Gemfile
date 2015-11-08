@@ -54,6 +54,8 @@ group :development, :test do
   gem 'factory_girl'
   gem 'dotenv-rails'
   gem 'pry-rails'
+  gem "faker"
+  gem 'database_cleaner'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
