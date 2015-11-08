@@ -45,6 +45,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'shoulda'
   gem 'rspec-rails'
