@@ -11,13 +11,13 @@
               <%= t"Email Address" %> <span>*</span>
             <% end %>
             <br/>
-            <%= f.email_field :email, autofocus: true, required: true, class: "form-control unicase-form-control text-input" %>   
+            <%= f.email_field :email, autofocus: true, required: true, class: "form-control unicase-form-control text-input", id: "login_email" %>   
           </div>
           <div class="form-group">
             <%= f.label :password, class: "info-title" do %>
               <%= t"Password" %> <span>*</span>
             <% end %><br/>
-            <%= f.password_field :password, autocomplete: "off", required: true, class: "form-control unicase-form-control text-input" %>
+            <%= f.password_field :password, autocomplete: "off", required: true, class: "form-control unicase-form-control text-input", id: "login_password" %>
           </div>
           <div class="radio outer-xs">
             <label class="nopadding">
@@ -40,7 +40,7 @@
             <%= f.label :email, class: "info-title" do %>
               <%= t"Email Address" %> <span>*</span>
             <% end %><br/>
-            <%= f.email_field :email, autofocus: true, required: true, class: "form-control unicase-form-control text-input" %>   
+            <%= f.email_field :email, autofocus: true, required: true, class: "form-control unicase-form-control text-input", id: "registration_email" %>   
           </div>
           <div class="form-group">
             <%= f.label :password, class: "info-title" do %>
@@ -51,13 +51,13 @@
                 (<%= @minimum_password_length %> characters minimum)
               </em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "off", required: true, class: "form-control unicase-form-control text-input" %>
+            <%= f.password_field :password, autocomplete: "off", required: true, class: "form-control unicase-form-control text-input", id: "registration_password" %>
           </div>
           <div class="form-group">
             <%= f.label :password_confirmation, class: "info-title" do %>
               <%= t"Password Confirmation" %> <span>*</span>
             <% end %><br/>
-            <%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: "form-control unicase-form-control text-input" %>
+            <%= f.password_field :password_confirmation, required: true, autocomplete: "off", class: "form-control unicase-form-control text-input", id: "registration_password_confirmation" %>
           </div>
           <button type="submit" class="btn-upper btn btn-primary checkout-page-button"><%= t"Sign Up" %></button>
         <% end %>

@@ -1,7 +1,8 @@
 module AuthenticationHelper
-  def login_user
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+  def sign_in_as(user)
+    visit root_path
+    find("#login_email").set user.email
+    find("#login_password").set user.password
+    click_on "Login"
   end
 end
