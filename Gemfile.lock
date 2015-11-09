@@ -364,8 +364,6 @@ GEM
       hitimes
     tinymce-rails (4.2.6)
       railties (>= 3.1.1)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -420,7 +418,6 @@ DEPENDENCIES
   sidekiq
   spring
   tinymce-rails
-  turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   will_paginate (~> 3.0.5)

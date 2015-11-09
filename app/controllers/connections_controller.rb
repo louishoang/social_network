@@ -14,4 +14,17 @@ class ConnectionsController < ApplicationController
     end
   end
 
+  def update
+    @connection = Connection.find(params[:id])
+    @connection.status = params[:status]
+    if @connection.save
+       respond_to do |format|
+        format.json {render json: { :request_status => @connection.status }}
+      end
+    else
+      respond_to do |format|
+        format.json {render json: { status: :unprocessable_entity, :message => @connection.errors.full_messages.to_sentence }}
+      end
+    end
+  end
 end

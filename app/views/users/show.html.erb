@@ -18,6 +18,26 @@
         </div>
       </div>
     </div>
+    <div class="main-l-profile form-container m-t-20 x-padding">
+      <strong>Pending Request:</strong>
+      <% if @user.pending_request.present? %>
+        <% @user.pending_request.each do |pen_con| %>
+          <div class="row sing-request m-t-20">
+            <div class="col-xs-12 columns no-padding">
+              <div class="col-xs-12 columns">
+                <%= pen_con.friend.full_name %>
+              </div>
+              <div class="col-xs-12 columns">
+                <a href="javascript:;" data-url="<%= user_connection_path(user_id: @user.id, id: pen_con.id, status: Connection::STATUS_ACTIVE) %>" class="fr-request-resp btn btn-success"> Accept </a>
+                <a href="javascript:;" data-url="<%= user_connection_path(user_id: @user.id, id: pen_con.id, status: Connection::STATUS_DECLINED) %>" class="fr-request-resp btn btn-warning"> Decline</a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div>No Pending Request</div>
+      <% end %>
+    </div>
   </div>
   <div class="col-xs-12 col-md-12 col-lg-6 columns">
     <% if can? :read, @user %>
@@ -35,7 +55,7 @@
           </div>
         </div>
       <% end %>
-      <div class="row-fluid post-showroom" id="posts-collection">
+      <div class="row-fluid post-showroom <%= current_user.id != @user.id ? 'nomargin' : '' %>" id="posts-collection">
         <%= render partial: "posts/entity", collection: @post_collection %>
       </div>
       <div id="infinite-scrolling">

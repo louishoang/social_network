@@ -14,6 +14,7 @@ class Connection < ActiveRecord::Base
   after_commit :send_notification_email, on: :create
 
   scope :active, -> {where("status = ?", STATUS_ACTIVE)}
+  scope :pending, -> {where("status = ?", STATUS_PENDING)}  
 
   def send_notification_email
     if self.status.present? && self.status == STATUS_PENDING  

@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :connections
   has_many :friends, :through => :connections
 
+  has_many :inverse_connections, :class_name => "Connection", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_connections, :source => :user
+
   has_attached_file :avatar, styles: { medium: "150x150>", thumb: "50x50>" },
     default_url: "missing.png",
     :storage => :s3,
@@ -38,5 +41,9 @@ class User < ActiveRecord::Base
 
   def has_friend_request?(user)
     self.connections.map(&:friend_id).include?(user.id) ? true : false
+  end
+
+  def pending_request
+    self.inverse_connections.where("connections.status = ?", Connection::STATUS_PENDING)
   end
 end

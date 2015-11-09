@@ -93,6 +93,10 @@ nav.app-navbar .search-form .form-group{
   border-radius: 0px !important;
 }
 
+.nomargin{
+  margin: 0px !important;
+}
+
 .form-container.c-padding{
   padding: 10px 30px 10px 30px;
 }

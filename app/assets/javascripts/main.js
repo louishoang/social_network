@@ -147,6 +147,21 @@ $( document ).ready(function() {
     });
   });
 
+  $(document).on("click", ".fr-request-resp", function(e){
+    $this = $(e.target);
+    url = $this.data("url");      
+    $.ajax({
+      url: url,
+      method: "PUT",
+      success: function(resp){
+        if(resp.request_status){
+          $this.closest(".sing-request").remove();
+          toastr.success("Friendship " + resp.request_status);
+        }       
+      }
+    });
+  });
+
   toastr.options = {
     "closeButton": true,
     "debug": false,
