@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   get 'weather', to: 'home#weather', as: 'weather'
 
-  resources :users
+  resources :users do
+    resources :connections
+  end
   
   resources :posts do
     resources :comments

@@ -35,4 +35,8 @@ class User < ActiveRecord::Base
   def s3_credentials
     {:bucket => "cholon", :access_key_id => ENV['AWS_ACCESS_KEY_ID'], :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']}
   end
+
+  def has_friend_request?(user)
+    self.connections.map(&:id).include?(user.id) ? true : false
+  end
 end

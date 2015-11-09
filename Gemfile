@@ -29,6 +29,8 @@ gem "font-awesome-rails"
 #authentication
 gem 'devise'
 
+gem 'cancancan'
+
 # html editor
 gem 'tinymce-rails'
 

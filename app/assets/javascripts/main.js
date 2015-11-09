@@ -136,6 +136,19 @@ $( document ).ready(function() {
     }
   });
 
+  $(document).on("click", ".friend-request", function(e){
+    $this = $(e.target);
+    url = $this.data("url");      
+    $.ajax({
+      url: url,
+      success: function(resp){
+        debugger;
+        $commentsElm.html(resp);
+        renderUI($commentsElm);
+      }
+    });
+  });
+
   toastr.options = {
     "closeButton": true,
     "debug": false,
