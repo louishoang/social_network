@@ -39,7 +39,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.full_name %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">My Profile</a></li>
+                  <li><a href="<%= edit_user_path(current_user) %>">Profile</a></li>
                   <li>
                     <%= link_to destroy_user_session_path, :method => :delete do %>
                       <i class="icon fa fa-sign-out"></i> Logout
