@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108230744) do
+ActiveRecord::Schema.define(version: 20151108235314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20151108230744) do
   end
 
   add_index "comments", ["user_id", "post_id"], name: "index_comments_on_user_id_and_post_id", using: :btree
+
+  create_table "connections", force: :cascade do |t|
+    t.integer  "user_id",                        null: false
+    t.integer  "friend_id",                      null: false
+    t.string   "status",     default: "Pending", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "connections", ["user_id", "friend_id"], name: "index_connections_on_user_id_and_friend_id", unique: true, using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

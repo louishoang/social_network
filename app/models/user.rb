@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
+  has_many :connections
+  has_many :friends, :through => :connections
 
   has_attached_file :avatar, styles: { medium: "150x150>", thumb: "50x50>" },
     default_url: "missing.png",
