@@ -9,7 +9,7 @@ class Ability
       to_return = false
       if person.id == user.id
         to_return = true
-      elsif user.connections.active.map(&:id).include?(person.id) || user.inverse_connections.active.map(&:user_id).include?(person.id)
+      elsif user.connections.active.map(&:friend_id).include?(person.id) || user.inverse_connections.active.map(&:user_id).include?(person.id)
         to_return = true
       end
     end
