@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      @user = @post.user
       respond_to do |format|
         format.json {render json: {
           :post_valid => true,
