@@ -37,6 +37,6 @@ class User < ActiveRecord::Base
   end
 
   def has_friend_request?(user)
-    self.connections.map(&:id).include?(user.id) ? true : false
+    self.connections.map(&:friend_id).include?(user.id) ? true : false
   end
 end
