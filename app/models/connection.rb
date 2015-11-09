@@ -11,12 +11,12 @@ class Connection < ActiveRecord::Base
   validates :user, presence: true
   validates :status, presence: true
 
-  after_save :send_notification_email
+  after_commit :send_notification_email, on: :create
 
   scope :active, -> {where("status = ?", STATUS_ACTIVE)}
 
   def send_notification_email
-    if self.status.present? && self.status == STATUS_PENDING
+    if self.status.present? && self.status == STATUS_PENDING  
       BackgroundWorker.perform_async(self.id)
     end
   end
