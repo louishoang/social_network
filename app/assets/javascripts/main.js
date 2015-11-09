@@ -142,7 +142,7 @@ $( document ).ready(function() {
     $.ajax({
       url: url,
       success: function(resp){
-        debugger;
+        toastr.success(resp.message);
       }
     });
   });
