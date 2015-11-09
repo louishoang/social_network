@@ -1,0 +1,10 @@
+<% cache rand_user do %>
+  <div class="col-xs-12 columns no-padding m-t-20">
+    <div class="col-xs-4 columns no-padding">
+      <a href="<%= user_path(rand_user)%>"><%= image_tag(rand_user.avatar.url(:thumb), alt: "Profile Image", class: "xs-thumb") %></a>
+    </div>
+    <div class="col-xs-8 columns">
+      <a href="<%= user_path(rand_user)%>"><%= rand_user.full_name %></a>
+    </div>
+  </div>
+<% end %>

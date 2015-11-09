@@ -320,4 +320,18 @@ footer{
   color: #9197a3;
 }
 
+.xs-thumb{
+  width: 50px;
+}
+
+.all_users{
+  text-align: center;
+  color: #FF8200;
+  font-size: 24px;
+  font-family: 'Fjalla One';
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+  text-transform: uppercase;
+}
+
 

@@ -74,6 +74,18 @@
       </div>
     <% end %>
   </div>
-  <div class="col-xs-12 col-md-12 col-lg-3 columns" id="current-weather">
+  <div class="col-xs-12 col-md-12 col-lg-3 columns no-padding">
+    <div class="row">
+      <div class="col-xs-12 columns" id="current-weather">
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-xs-12 columns form-container x-padding m-t-20">
+        <div class="row-fluid">
+          <h4 class="all_users">ALL USERS</h4>
+        </div>
+        <%= render :partial => "rand_user.html", :collection => @rand_users %>
+      </div>
+    </div>
   </div>
 </div>
