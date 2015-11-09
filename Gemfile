@@ -38,6 +38,10 @@ gem 'friendly_id', '~> 5.1.0'
 #background job
 gem 'sidekiq'
 
+#cache
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
+
 #upload-storage
 gem "paperclip", "~> 4.3"
 gem 'rmagick', '~> 2.15.3'
