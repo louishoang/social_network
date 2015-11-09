@@ -143,8 +143,6 @@ $( document ).ready(function() {
       url: url,
       success: function(resp){
         debugger;
-        $commentsElm.html(resp);
-        renderUI($commentsElm);
       }
     });
   });

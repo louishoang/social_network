@@ -45,9 +45,9 @@
       You need to be friend with <strong><%= @user.full_name %></strong> to view posts!
       <div class="row-fluid m-t-20">
         <% if current_user.has_friend_request?(@user) %>
-          <a href="javascript:;" data-url="<%= new_user_connection_path(current_user, friend_id: @user.id) %>" class="btn btn-primary friend-request">Send Friend Request</a>
+          <button class="btn btn-info" disabled="disabled">Request Has Been Sent</button>      
         <% else %>
-          <button class="btn btn-info" disabled="disabled">Request Has Been Sent</button>
+          <a href="javascript:;" data-url="<%= new_user_connection_path(current_user, friend_id: @user.id) %>" class="btn btn-primary friend-request">Send Friend Request</a>
         <% end %>
       </div>
     <% end %>

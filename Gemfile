@@ -28,13 +28,16 @@ gem "font-awesome-rails"
 
 #authentication
 gem 'devise'
-
+#authorization
 gem 'cancancan'
 
 # html editor
 gem 'tinymce-rails'
-
+#pretty url
 gem 'friendly_id', '~> 5.1.0'
+
+#background job
+gem 'sidekiq'
 
 #upload-storage
 gem "paperclip", "~> 4.3"

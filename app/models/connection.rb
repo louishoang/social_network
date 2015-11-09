@@ -1,4 +1,5 @@
 class Connection < ActiveRecord::Base
+
   STATUS_PENDING = "Pending"
   STATUS_ACTIVE = "Active"
   STATUS_DECLINED = "Declined"
@@ -10,5 +11,13 @@ class Connection < ActiveRecord::Base
   validates :user, presence: true
   validates :status, presence: true
 
+  after_save :send_notification_email
+
   scope :active, -> {where("status = ?", STATUS_ACTIVE)}
+
+  def send_notification_email
+    if self.status.present? && self.status == STATUS_PENDING
+      BackgroundWorker.perform_async(self.id)
+    end
+  end
 end
