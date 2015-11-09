@@ -1,38 +1,40 @@
-<div class="form-container c-padding no-radius post-detail">
-  <div class="row">
-    <div class="col-xs-12 columns">
-      <div class="post-header">
-        <div class="col-xs-3 col-md-1 col-lg-2 columns no-padding">
-          <%= image_tag(@user.avatar.url(:thumb), alt: "Profile Image", class: "xs-thumb") %>
-        </div>
-        <div class="col-xs-9 col-md-11 col-lg-10 columns no-padding">
-          <%= entity.user.email %>
-          <div class="post-date">
-            <%= entity.updated_at.to_s(:post_datetime) %>
+<% cache posts do %>
+  <div class="form-container c-padding no-radius post-detail">
+    <div class="row">
+      <div class="col-xs-12 columns">
+        <div class="post-header">
+          <div class="col-xs-3 col-md-1 col-lg-2 columns no-padding">
+            <%= image_tag(@user.avatar.url(:thumb), alt: "Profile Image", class: "xs-thumb") %>
+          </div>
+          <div class="col-xs-9 col-md-11 col-lg-10 columns no-padding">
+            <%= entity.user.email %>
+            <div class="post-date">
+              <%= entity.updated_at.to_s(:post_datetime) %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 columns m-t-20">
-      <div class="post-body">
-        <%= entity.content.html_safe %>
+    <div class="row">
+      <div class="col-xs-12 columns m-t-20">
+        <div class="post-body">
+          <%= entity.content.html_safe %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="sline">
-    </div>
-    <div class="col-xs-12 columns">
-      <div class="post-bottom">
-        <% @comments = entity.comments %>
-        <a href="javascript:;" data-url="<%= post_comments_path(entity) %>" class="get_comments" data-replace="#<%= dom_id(entity) %>_comment_collections">
-          <i class="fa fa-commenting-o"></i> Comment (<span id="<%= dom_id(entity) %>_comment"><%= @comments.count %></span>)
-        </a>
+    <div class="row">
+      <div class="sline">
       </div>
+      <div class="col-xs-12 columns">
+        <div class="post-bottom">
+          <% @comments = entity.comments %>
+          <a href="javascript:;" data-url="<%= post_comments_path(entity) %>" class="get_comments" data-replace="#<%= dom_id(entity) %>_comment_collections">
+            <i class="fa fa-commenting-o"></i> Comment (<span id="<%= dom_id(entity) %>_comment"><%= @comments.count %></span>)
+          </a>
+        </div>
+      </div>
+      <div class="post-comments" id="<%= dom_id(entity) %>_comment_collections"></div>
+      <%= render :partial => "comments/new.html", :locals => {:post => entity} %>
     </div>
-    <div class="post-comments" id="<%= dom_id(entity) %>_comment_collections"></div>
-    <%= render :partial => "comments/new.html", :locals => {:post => entity} %>
   </div>
-</div>
+<% end %>
