@@ -4,7 +4,7 @@
       <div class="header"></div>
       <div class="body">
         <a href="profile/index.html">
-          <%= image_tag(@user.avatar.url(:medium), alt: "Profile Image", class: "avatar") %>
+          <%= image_tag(@user.avatar.url(:medium), alt: "Profile Image", class: "avatarClass") %>
         </a>
         <div class="bottom">
           <h4 class="profile-name">
@@ -69,7 +69,7 @@
       You need to be friend with <strong><%= @user.full_name %></strong> to view posts!
       <div class="row-fluid m-t-20">
         <% if current_user.has_friend_request?(@user) %>
-          <button class="btn btn-info" disabled="disabled">Request Has Been Sent</button>      
+          <button class="btn btn-info" disabled="disabled">Request Has Been Sent</button>
         <% else %>
           <a href="javascript:;" data-url="<%= new_user_connection_path(current_user, friend_id: @user.id) %>" class="btn btn-primary friend-request">Send Friend Request</a>
         <% end %>
