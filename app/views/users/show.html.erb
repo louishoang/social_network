@@ -4,12 +4,14 @@
       <div class="header"></div>
       <div class="body">
         <a href="profile/index.html">
-          <%= image_tag(@user.avatar.url(:medium), alt: "Profile Image", class: "ava") %>
+          <%= image_tag(@user.avatar.url(:medium), alt: "Profile Image", class: "avatar") %>
         </a>
         <div class="bottom">
           <h4 class="profile-name">
             <% if can? :edit, @user %>
-              <a class="link--name" href="<%= edit_user_path(@user)%>"><%= @user.full_name %>&nbsp;&nbsp;<i class="fa fa-pencil-square-o"></i></a>
+              <a class="link--name" href="<%= edit_user_path(@user)%>">
+                <%= @user.full_name %>&nbsp;&nbsp;<i class="fa fa-pencil-square-o"></i>
+              </a>
             <% else %>
               <%= @user.full_name %>
             <% end %>
